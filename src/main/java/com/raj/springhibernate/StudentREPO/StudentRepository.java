@@ -55,9 +55,8 @@ public class StudentRepository {
 	public void deleteStudent(int id) {
 		StudentDTO deleteStudent=findStudent(id);
 		Student studentDelete=studentRowMapper.studentDTOtoStudentEntity(deleteStudent);
-		if(studentDelete!=null) {
-			entityManager.remove(studentDelete);
-		}
+		Student delete = entityManager.merge(studentDelete);
+		entityManager.remove(delete);
 	}
 	
 	public List<StudentDTO> getAllStudents(){
